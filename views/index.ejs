@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>首页</title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head> 
+  <body>
+    <!-- <h1><%= data.total %></h1> -->
+
+    <%- include('bar',{username:data.author}) %>
+    <div class="list">
+
+     <% data.list.map((ele,idx)=>{ %>
+      <div class="row">
+          <span ><%= (idx+1) %></span>
+          <span ><%= ele.author %></span>
+          <span ><a href="/detail?id=<%= ele._id %>"><%= ele.title %></a></span>
+           <span><%= ele.createTimeZH %></span>
+          <span>
+              <a href="/write?id=<%= ele._id %>">编辑</a>
+              <a href="articles/delete?id=<%= ele._id %>">删除</a>
+          </span>
+      </div>
+    <% })%>
+
+      <div class="pages">
+          <%  for(let i=1; i<= data.total;i++){ %>
+              <a href="/?page=<%= i %>"><%= i %></a>
+          <% } %>
+          
+      </div>
+  </div>
+  
+</body>
+</html>

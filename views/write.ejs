@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>写文章</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+        <%- include('bar',{username:doc.author}) %>
+    <div class="article">
+        <form action="/articles/write" method="post">
+            <input  name="author" value="<%= doc.author  %>">
+            <input  name="id" value="<%= doc._id %>">
+            <input type="text" name="title" placeholder="标题在5~30个字之间" value="<%= doc.title %>">
+            <textarea name="content" class="xheditor" placeholder="请输入文章正文，字数不限！"><%- doc.content %></textarea>
+            <% if(doc._id){ %>
+                  <input type="submit" value="修改">
+            <%}else{%>
+                <input type="submit" value="发布">
+            <% } %>
+        
+        </form>
+    </div>
+    <script type="text/javascript" src="/xheditor/jquery/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/xheditor/xheditor-1.2.2.min.js"></script>
+    <script type="text/javascript" src="/xheditor/xheditor_lang/zh-cn.js"></script>
+    <script>
+        $('.xheditor').xheditor({
+          tools: 'full',
+          skin: 'default',
+          upImgUrl: '/articles/upload',
+          html5Upload: false,
+          upMultiple: 1
+        });
+    </script>
+</body>
+</html>
